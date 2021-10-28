@@ -19,6 +19,7 @@
   with_sequence: start=0 end={{ clients }}
   when: wg0_conf is not defined or wg0_conf.stat.exists == false
 
+
 - name: Register private key file contents
   shell: cat {{ item }}.private
   register: private_key_files
@@ -30,6 +31,7 @@
   register: public_key_files
   with_sequence: start=0 end={{ clients }}
   when: wg0_conf is not defined or wg0_conf.stat.exists == false
+ 
 
 # Client configs are traditionally named wg0-client.conf, this lets
 # us keep that scheme.

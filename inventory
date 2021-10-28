@@ -1,0 +1,10 @@
+[server]
+172.28.128.85
+172.28.128.86
+
+
+
+# Variables for all the servers
+[server:vars]
+ansible_user=vagrant
+ansible_private_key_file=insecure_private_key

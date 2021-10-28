@@ -33,25 +33,25 @@
     ctstate: NEW
     jump: ACCEPT
    
-- name: Allow recursive DNS tcp    
-  iptables:
-    chain: INPUT
-    source: "{{ vpn_network }}.0/24"
-    protocol: tcp
-    match: tcp
-    destination_port: 53
-    ctstate: NEW
-    jump: ACCEPT
+# - name: Allow recursive DNS tcp    
+#   iptables:
+#     chain: INPUT
+#     source: "{{ vpn_network }}.0/24"
+#     protocol: tcp
+#     match: tcp
+#     destination_port: 53
+#     ctstate: NEW
+#     jump: ACCEPT
   
-- name: Allow recursive DNS udp  
-  iptables:
-    chain: INPUT
-    source: "{{ vpn_network }}.0/24"
-    protocol: udp
-    match: udp
-    destination_port: 53
-    ctstate: NEW
-    jump: ACCEPT
+# - name: Allow recursive DNS udp  
+#   iptables:
+#     chain: INPUT
+#     source: "{{ vpn_network }}.0/24"
+#     protocol: udp
+#     match: udp
+#     destination_port: 53
+#     ctstate: NEW
+#     jump: ACCEPT
     
 - name: Allow forwarding of packets that stay in the tunnel 
   iptables:

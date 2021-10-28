@@ -1,8 +1,9 @@
----
+
+- import_playbook: 'check_py_installation.yml'
 
 - name: Setup Wireguard VPN on a remote server
-  hosts: all
-  #become: true
+  hosts: server
+  become_user: root
   gather_facts: true
   roles:
-    - {role: 'wireguard_role', tags: 'wireguard'}
+   - {role: 'wireguard_role', tags: 'wireguard'}

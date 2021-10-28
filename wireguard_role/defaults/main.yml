@@ -2,12 +2,15 @@
 # defaults file for wireguard_role
 
 #Declare the VPN subnet
-vpn_network: '10.200.200'
+vpn_network: '10.0.0'
 
 #Declare the VPN server port
 vpn_port: '51820'
 
 #Declare the number of clients
-clients: 10
+clients: 2
 
-client_config_path: 'wireguard_role/profiles'
+client_config_path: 'profiles'
+
+
+HOST_COUNT: "{{ groups['server'] | length }}"

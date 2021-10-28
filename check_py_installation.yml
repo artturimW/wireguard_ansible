@@ -1,0 +1,31 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+
+  - name: Check that server have python installed.
+    raw: test -e /usr/bin/python
+    changed_when: false
+    failed_when: false
+    register: check_python
+
+
+  # # check if apt is presence (ubuntu), if not use yum
+  - name: Install Python
+    raw: test -e /usr/bin/apt && (apt -y update && apt install -y python-minimal) || (yum -y install python libselinux-python)
+    when: check_python.rc != 0
+    ignore_errors: yes
+
+
+  # ### apt
+  # - name: Install Python
+  #   raw: apt -y update && apt install -y python-minimal
+  #   when: check_python.rc != 0
+
+  ### yum
+  #- name: Install Python
+  #  raw: yum -y install python
+  #  when: check_python.rc != 0
+
