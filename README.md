@@ -2,18 +2,12 @@
 
 This is the ansible automation of the Wireguard VPN set up described here https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
 
-This will create ten VPN client profiles when done.
+This will create two VPN client profiles when done.
 
 This project has also been restructured as an ansible role for inclusion in other ansible playbooks.
 
-# Requirements
 
-This assumes an ubuntu 16.04 or 18.04 client. It should also work on other platforms with minimal tweaking.
 
-## Install git
-```bash
-sudo apt-get install git
-```
 
 ## Install ansible
 
@@ -23,50 +17,28 @@ sudo apt-get update && sudo apt-get install ansible -y
 ```
 For optimal use, use ansible version greater than 2.5
 
-# Server set up
 
-This assumes you have an Ubuntu 16.04 server with ssh access on port 22.
-Ensure that you've already added the server key to your known hosts file by sshing into it at least once.
-If you are using an SSH key, then you can forgo that.
 
-# Quick setup
 
-On the client
-
-```bash
-git clone https://github.com/iamckn/wireguard_ansible
-cd wireguard_ansible
-```
-
-Edit the hosts file in that folder and fill in the IP field with the VPN server IP
+Edit the inventory file in that folder and fill in the IP field with the VPN server IP
 
 Begin the remote installation process by running
 
 ```bash
-ansible-playbook wireguard.yml -u root -k -i hosts
+ansible-playbook wireguard.yml -i inventory
 ```
 
-If you're using an SSH key for authentication run this instead
-
-```bash
-ansible-playbook wireguard.yml -u root -i hosts --key-file /path/to/keyfile
-```
-
-Give it a few minutes and the server set up will be complete.
-
-Ten client configs will be created on the VPN server in the folder /root/wg_clients. They will also be downloaded to the **wireguard_role/profiles** folder on your local host.
 
 
-Assuming you're using the first client config, copy it to **/etc/wireguard/** and you can start using the VPN tunnel on your client.
+Client configs will be downloaded to the **/profiles** folder on your local host.
 
-To bring up the VPN interface 
+
+Copy client config to **/etc/wireguard/** and you can start using the VPN tunnel on your client.
+
+
+To bring up/down the VPN interface
 ```bash
 sudo wg-quick up wg0-client
-```
-
-
-To bring down the VPN interface
-```bash
 sudo wg-quick down wg0-client
 ```
 
